@@ -9,14 +9,15 @@ object NetAssetStockPriceHelper {
 
 		(empty /: symbolsAndUnits) { (data, element) =>
 			val (symbol, units) = element
-			data ++ Array(List(symbol, units, "?", "?").toArray)
+			data ++ Array(List(symbol, units, "0.0", "0.0").toArray)
 		}
 	}
 
 	def fetchPrice(updater: Actor) = actor {
 		val caller = self
-		symbolsAndUnits.keys.foreach { symbol =>
-			actor {
+
+		symbolsAndUnits.keys.foreach {
+			symbol => actor {
 				caller ! (symbol, StockPriceFinder.getLatestClosingPrice(symbol))
 			}
 		}
@@ -26,9 +27,12 @@ object NetAssetStockPriceHelper {
 				case (symbol: String, latestClosingPrice: Double) =>
 				val units = symbolsAndUnits(symbol)
 				val value = units * latestClosingPrice
+				//println("%-7s  %-5d  %-16f  %f".format(symbol, units, latestClosingPrice, value))
+				updater ! (symbol, units, latestClosingPrice, value)
 				worth + value
 			}
     	}
+
 		updater ! netWorth
 	}
 }
