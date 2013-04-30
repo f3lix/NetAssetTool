@@ -1,5 +1,5 @@
 object UseXML {
-	def main(args: Array[String]) {
+	def useXML() = {
 		val XMLFragment = 
 		<symbols>
 			<symbol ticker="AAPL"><units>200</units></symbol>

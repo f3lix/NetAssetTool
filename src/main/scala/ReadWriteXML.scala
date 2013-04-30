@@ -2,7 +2,7 @@ import scala.xml._
 import java.io._
 
 object ReadWriteXML {
-	def main(args: Array[String]) {
+	def readFromFile() = {
 		val stocksAndUnits = XML.load("stocks.xml")
 		//println(stocksAndUnits.getClass())
 		//println("Loaded file has " + (stocksAndUnits \\ "symbol").size + " symbol elements")
