@@ -2,7 +2,7 @@ import scala.actors._
 import Actor._
 
 object FindTotalWorthConcurrent {
-	def main(args: Array[String]) {
+	def getTotalWorth() = {
 		val symbolsAndUnits = StockPriceFinder.getTickerAndUnits
 
 		val caller = self
