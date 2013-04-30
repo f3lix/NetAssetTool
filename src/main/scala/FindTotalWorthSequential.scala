@@ -1,5 +1,5 @@
 object FindTotalWorthSequential {
-	def main(args: Array[String]) {
+	def getTotalWorth() = {
 		val symbolsAndUnits = StockPriceFinder.getTickerAndUnits
 
 		println("Today is " + new java.util.Date())
